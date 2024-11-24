@@ -1,21 +1,14 @@
 //241020
-// <!--GAMFC-->version base on commit 43fad05dcdae3b723c53c226f8181fc5bd47223e, time is 2023-06-22 15:20:05 UTC<!--GAMFC-END-->.
-// @ts-ignore
 import { connect } from 'cloudflare:sockets';
 
-// How to generate your own UUID:
-// [Windows] Press "Win + R", input cmd and run:  Powershell -NoExit -Command "[guid]::NewGuid()"
-let userID = '90cd4a77-141a-43c9-991b-08263cfe9c10';
+let userID = 'c4fd9ef6-7628-4333-9b34-2340f36f1c34';
 
-let proxyIP = '';// 小白勿动，该地址并不影响你的网速，这是给CF代理使用的。'cdn.xn--b6gac.eu.org, cdn-all.xn--b6gac.eu.org'
+let proxyIP = '';
 
-let sub = '';// 避免项目被滥用，现已取消内置订阅器
-let subconverter = 'SUBAPI.fxxk.dedyn.io';// clash订阅转换后端，目前使用CM的订阅转换功能。自带虚假uuid和host订阅。
-let subconfig = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_MultiMode.ini"; //订阅配置文件
+let sub = '';
+let subconverter = 'SUBAPI.fxxk.dedyn.io';
+let subconfig = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_MultiMode.ini";
 let subProtocol = 'https';
-// The user name and password do not contain special characters
-// Setting the address will ignore proxyIP
-// Example:  user:pass@host:port  or  host:port
 let socks5Address = '';
 
 if (!isValidUUID(userID)) {
@@ -25,20 +18,18 @@ if (!isValidUUID(userID)) {
 let parsedSocks5Address = {}; 
 let enableSocks = false;
 
-// 虚假uuid和hostname，用于发送给配置生成服务
 let fakeUserID ;
 let fakeHostName ;
 let noTLS = 'false'; 
-const expire = 4102329600;//2099-12-31
+const expire = 4102329600;
 let proxyIPs;
 let socks5s;
 let go2Socks5s = [
 	'*ttvnw.net',
 ];
 let addresses = [
-	//当sub为空时启用本地优选域名/优选IP，若不带端口号 TLS默认端口为443，#号后为备注别名
 	/*
-	'Join.my.Telegram.channel.CMLiussss.to.unlock.more.premium.nodes.cf.090227.xyz#加入我的频道t.me/CMLiussss解锁更多优选节点',
+	'Join.my.Telegram.channel.CMLiussss.to.unlock.more.premium.nodes.cf.090227.xyz#0',
 	'visa.cn:443',
 	'www.visa.com:8443',
 	'cis.visa.com:2053',
@@ -57,7 +48,6 @@ let addresses = [
 ];
 let addressesapi = [];
 let addressesnotls = [
-	//当sub为空且域名带有"worker"字样时启用本地优选域名/优选IP，若不带端口号 noTLS默认端口为80，#号后为备注别名
 	/*
 	'usa.visa.com',
 	'myanmar.visa.com:8080',
@@ -74,8 +64,8 @@ let DLS = 8;
 let FileName = 'edgetunnel';
 let BotToken ='';
 let ChatID =''; 
-let proxyhosts = [];//本地代理域名池
-let proxyhostsURL = 'https://raw.githubusercontent.com/cmliu/CFcdnVmess2sub/main/proxyhosts';//在线代理域名池URL
+let proxyhosts = [];
+let proxyhostsURL = 'https://raw.githubusercontent.com/cmliu/CFcdnVmess2sub/main/proxyhosts';
 let RproxyIP = 'false';
 let httpsPorts = ["2053","2083","2087","2096","8443"];
 export default {
@@ -97,7 +87,6 @@ export default {
 			const fakeUserIDMD5 = await MD5MD5(`${userID}${timestamp}`);
 			fakeUserID = fakeUserIDMD5.slice(0, 8) + "-" + fakeUserIDMD5.slice(8, 12) + "-" + fakeUserIDMD5.slice(12, 16) + "-" + fakeUserIDMD5.slice(16, 20) + "-" + fakeUserIDMD5.slice(20);
 			fakeHostName = fakeUserIDMD5.slice(6, 9) + "." + fakeUserIDMD5.slice(13, 19);
-			//console.log(`虚假UUID: ${fakeUserID}`); // 打印fakeID
 
 			proxyIP = env.PROXYIP || proxyIP;
 			proxyIPs = await ADD(proxyIP);
